@@ -1,0 +1,17 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    faraday (0.13.1)
+      multipart-post (>= 1.2, < 3)
+    hawk-auth (0.2.5)
+    multipart-post (2.0.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  faraday
+  hawk-auth
+
+BUNDLED WITH
+   1.15.4
