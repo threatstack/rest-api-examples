@@ -1,2 +1,2 @@
 mohawk==0.3.4
-requests==1.0.2
+requests==2.18.4
