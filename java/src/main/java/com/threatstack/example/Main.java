@@ -16,6 +16,7 @@ public class Main {
         String USER_ID = getEnvOrDefault("TS_USER_ID", null);
         String ORGANIZATION_ID = getEnvOrDefault("TS_ORGANIZATION_ID", null);
         String API_KEY = getEnvOrDefault("TS_API_KEY", null);
+        String javaVersion = getEnvOrDefault("java.version", "unknown");
 
         String BASE_PATH = "https://" + HOST;
         String URI_PATH = "/help/hawk/self-test";
@@ -32,6 +33,7 @@ public class Main {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.addRequestProperty("Authorization", hawkHeader);
+            conn.addRequestProperty("User-Agent", "Java/" + javaVersion);
             String responseBody = readResponseAndClose(conn);
 
             // There is no response authentication check here
