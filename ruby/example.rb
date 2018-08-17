@@ -50,17 +50,22 @@ response = req.get
 puts response.body.to_s
 
 response_auth_header = response.headers['Server-Authorization']
-# Authenticate returns the credentials hash if the response is authentic
-auth_result = Hawk::Client.authenticate(response_auth_header, {
-    :credentials => credentials,
-    :method => 'GET',
-    :request_uri => URI_PATH,
-    :host => HOST,
-    :ext => ORGANIZATION_ID,
-    :payload => response.body,
-    :content_type => "application/json",
-    :port => 443,
-    :nonce => nonce,
-    :ts => ts
-})
-puts "Request Authentic: " + (auth_result['id'] == credentials['id']).to_s
+
+if response_auth_header == nil
+  puts "No Authentication Header is available on the response. The response failed with a #{response.status}"
+elsif
+  # Authenticate returns the credentials hash if the response is authentic
+  auth_result = Hawk::Client.authenticate(response_auth_header, {
+      :credentials => credentials,
+      :method => 'GET',
+      :request_uri => URI_PATH,
+      :host => HOST,
+      :ext => ORGANIZATION_ID,
+      :payload => response.body,
+      :content_type => "application/json",
+      :port => 443,
+      :nonce => nonce,
+      :ts => ts
+  })
+  puts "Request Authentic: " + (auth_result['id'] == credentials['id']).to_s
+end
