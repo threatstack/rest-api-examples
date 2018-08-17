@@ -21,6 +21,8 @@ TS_USER_ID=x TS_ORGANIZATION_ID=x TS_API_KEY=x python3 example.py
 ```
 
 ## Ruby
+Disclaimer: Ruby's HAWK implementation is no longer maintained. You may want to consider a different language.
+
 Before you can install the dependencies, you must install Ruby and bundler:
 To install dependencies, run `bundle`:
 ```bash
