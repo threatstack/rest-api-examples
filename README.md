@@ -23,20 +23,8 @@ TS_USER_ID=x TS_ORGANIZATION_ID=x TS_API_KEY=x python3 example.py
 ## Ruby
 Disclaimer: Ruby's HAWK implementation is no longer maintained. You may want to consider a different language.
 
-Before you can install the dependencies, you must install Ruby and bundler:
-To install dependencies, run `bundle`:
-```bash
-bundle install
-```
+Examples have been removed, but leaving a signpost here for readers.
 
-Run the following ruby command using the environment variables:
-```bash
-TS_USER_ID=x TS_ORGANIZATION_ID=x TS_API_KEY=x ruby example.rb
-```
-
-NOTE: The Faraday HTTP client used in this example reorders the query string parameters into alphabetical order before sending them to the server.
-If you do not specify the parameters in your query string in alphabetical order, then the request to the server will fail with a 401 Unauthorized.
-This is because the Auth header that the client computes will be different than what the server computes.
 
 ## Java
 Before you can install the dependencies, you must install Java and Maven 3.
