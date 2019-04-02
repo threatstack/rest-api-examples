@@ -5,7 +5,7 @@ const https = require("https");
 
 const rulesetData = {
   'name': 'API Test Ruleset',
-  'description': 'This ruleset is being created as a test of the Threat Stack REST API',
+  'description': 'This ruleset was created as a test of the Threat Stack REST API',
   'ruleIds': []
 };
 
@@ -66,6 +66,7 @@ const headerOptions = {
   contentType: "application/json"
 };
 const authorizationHeader = Hawk.client.header(`https://${tsHost}${path}`, 'POST', headerOptions);
+console.log(authorizationHeader.field)
 
 makeRequest({
   host: tsHost,

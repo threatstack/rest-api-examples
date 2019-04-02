@@ -30,7 +30,7 @@ URL = BASE_PATH + URI_PATH
 
 ruleset_data = {
     'name': 'API Test Ruleset',
-    'description': 'This ruleset is being created as a test of the Threat Stack REST API',
+    'description': 'This ruleset was created as a test of the Threat Stack REST API',
     'ruleIds': []
 }
 
