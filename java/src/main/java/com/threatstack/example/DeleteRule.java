@@ -1,5 +1,8 @@
 package com.threatstack.example;
 
+import com.google.gson.*;
+import com.google.common.io.BaseEncoding;
+
 import com.wealdtech.hawk.HawkClient;
 import com.wealdtech.hawk.HawkCredentials;
 
@@ -8,36 +11,44 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.util.*;
 
-public class Main {
+public class DeleteRule {
     public static void main(String[] args) {
         String HOST = getEnvOrDefault("TS_HOST", "api.threatstack.com");
         String USER_ID = getEnvOrDefault("TS_USER_ID", null);
         String ORGANIZATION_ID = getEnvOrDefault("TS_ORGANIZATION_ID", null);
         String API_KEY = getEnvOrDefault("TS_API_KEY", null);
+        String RULESET_ID = getEnvOrDefault("TS_RULESET_ID", null);
+        String RULE_ID = getEnvOrDefault("TS_RULE_ID", null);
         String javaVersion = getEnvOrDefault("java.version", "unknown");
 
         String BASE_PATH = "https://" + HOST;
-        String URI_PATH = "/help/hawk/self-test";
+        String URI_PATH = "/v2/rulesets/" + RULESET_ID + "/rules/" + RULE_ID;
 
         HawkCredentials hawkCredentials = new HawkCredentials.Builder()
                 .keyId(USER_ID)
                 .key(API_KEY)
                 .algorithm(HawkCredentials.Algorithm.SHA256)
                 .build();
+
         try {
             HawkClient hawkClient = new HawkClient.Builder().credentials(hawkCredentials).build();
             URL url = new URL(BASE_PATH + URI_PATH);
-            String hawkHeader = hawkClient.generateAuthorizationHeader(url.toURI(), "GET", null, ORGANIZATION_ID, null, null);
+
+            String hawkHeader = hawkClient.generateAuthorizationHeader(url.toURI(), "DELETE", null, ORGANIZATION_ID, null, null);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
+            conn.setRequestMethod("DELETE");
             conn.addRequestProperty("Authorization", hawkHeader);
-            conn.addRequestProperty("User-Agent", "Java/" + javaVersion);
+            conn.addRequestProperty("Content-Type", "application/json");
+            conn.addRequestProperty("User-Agent", "");
+            
             String responseBody = readResponseAndClose(conn);
 
-            // There is no response authentication check here
-            // because the Java library for HAWK does not support it.
             System.out.println(responseBody);
         } catch (Throwable t) {
             t.printStackTrace();
