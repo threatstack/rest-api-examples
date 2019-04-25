@@ -49,3 +49,7 @@ Run the following node command using the environment variables:
 ```bash
 TS_USER_ID=x TS_ORGANIZATION_ID=x TS_API_KEY=x node example.js
 ```
+
+## Go
+Please see our Go CLI repository at 
+[threatstack/ts](https://github.com/threatstack/ts).
