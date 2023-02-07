@@ -78,7 +78,7 @@ makeRequest({
   method: 'GET',
   headers: {
     'Content-Type': 'application/json',
-    'Authorization': authorizationHeader.field
+    'Authorization': authorizationHeader.header
   }
 }, function (err, result) {
   if (err) {
